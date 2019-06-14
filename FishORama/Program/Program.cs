@@ -1,4 +1,5 @@
 ﻿using System;
+using FishLibrary;
 
 namespace FishORama
 {
@@ -15,7 +16,13 @@ namespace FishORama
         static void Main()
         {
             using (var game = new Simulation())
+            {
+                IUpdatable kernel = new Kernel(game);
+                game.Kernel = kernel;
                 game.Run();
+            }
+                
+                
         }
     }
 #endif

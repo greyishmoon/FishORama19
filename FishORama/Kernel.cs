@@ -2,13 +2,14 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using FishLibrary;
 
 namespace FishORama
 {
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Kernel
+    public class Kernel : IUpdatable, ILoadContent
     {
         private Simulation simulation;
 
@@ -19,12 +20,12 @@ namespace FishORama
             simulation = pSimulation;
         }
         
-        public void LoadContent()
+        public void LoadContent(AssetManager pAssetManager)
         {
-            Aquarium aquarium = new Aquarium("AquariumBackground", new Vector2(0, 0));
+            Aquarium aquarium = new Aquarium("AquariumBackground", new Vector2(0, 0), pAssetManager);
             simulation.InsertSprite(aquarium);
 
-            orangeFish1 = new OrangeFish("OrangeFish", new Vector2(0, 0));
+            orangeFish1 = new OrangeFish("OrangeFish", new Vector2(0, 0), pAssetManager);
             simulation.InsertSprite(orangeFish1);
         }
 

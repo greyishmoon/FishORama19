@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using FishLibrary;
 
-namespace FishORama
+namespace FishLibrary
 {
     /// <summary>
     /// This is the main type for your game.
@@ -17,7 +16,11 @@ namespace FishORama
 
         List<ISprite> Drawables = new List<ISprite>();
 
-        Kernel kernel;
+        IUpdatable kernel;
+        public IUpdatable Kernel
+        {
+            set { kernel = value; }
+        }
 
         AssetManager assetManager;
 
@@ -44,8 +47,6 @@ namespace FishORama
         /// </summary>
         protected override void Initialize()
         {
-            kernel = new Kernel(this);
-
             assetManager = new AssetManager();
 
             camera = new Camera(new Vector3(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2, 0));
@@ -59,6 +60,8 @@ namespace FishORama
         /// </summary>
         protected override void LoadContent()
         {
+            Console.WriteLine("Welcome to the FishORama Framework");
+
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             
@@ -66,58 +69,58 @@ namespace FishORama
             /// Load each texture into the AssetManager as an Asset
             Asset asset;
 
-            asset = new Asset(Content.Load<Texture2D>("Background"), 800, 600);
+            asset = new Asset(Content.Load<Texture2D>("Background"), new Vector2(800, 600));
             assetManager.LoadAsset("Background", asset);
 
-            asset = new Asset(Content.Load<Texture2D>("AquariumBackground"), 800, 600);
+            asset = new Asset(Content.Load<Texture2D>("AquariumBackground"), new Vector2(800, 600));
             assetManager.LoadAsset("AquariumBackground", asset);
 
-            asset = new Asset(Content.Load<Texture2D>("Midground_Rocks"), 800, 600);
+            asset = new Asset(Content.Load<Texture2D>("Midground_Rocks"), new Vector2(800, 600));
             assetManager.LoadAsset("Midground_Rocks", asset);
 
-            asset = new Asset(Content.Load<Texture2D>("ForegroundSand"), 800, 600);
+            asset = new Asset(Content.Load<Texture2D>("ForegroundSand"), new Vector2(800, 600));
             assetManager.LoadAsset("ForegroundSand", asset);
 
-            asset = new Asset(Content.Load<Texture2D>("Foreground_Rocks"), 800, 600);
+            asset = new Asset(Content.Load<Texture2D>("Foreground_Rocks"), new Vector2(800, 600));
             assetManager.LoadAsset("Foreground_Rocks", asset);
 
-            asset = new Asset(Content.Load<Texture2D>("OrangeFish"), 128, 86);
+            asset = new Asset(Content.Load<Texture2D>("OrangeFish"), new Vector2(128, 86));
             assetManager.LoadAsset("OrangeFish", asset);
 
-            asset = new Asset(Content.Load<Texture2D>("BlueFish"), 128, 86);
+            asset = new Asset(Content.Load<Texture2D>("BlueFish"), new Vector2(128, 86));
             assetManager.LoadAsset("BlueFish", asset);
 
-            asset = new Asset(Content.Load<Texture2D>("Seahorse"), 74, 128);
+            asset = new Asset(Content.Load<Texture2D>("Seahorse"), new Vector2(74, 128));
             assetManager.LoadAsset("Seahorse", asset);
 
-            asset = new Asset(Content.Load<Texture2D>("Urchin"), 180, 112);
+            asset = new Asset(Content.Load<Texture2D>("Urchin"), new Vector2(180, 112));
             assetManager.LoadAsset("Urchin", asset);
 
-            asset = new Asset(Content.Load<Texture2D>("Piranha1"), 132, 128);
+            asset = new Asset(Content.Load<Texture2D>("Piranha1"), new Vector2(132, 128));
             assetManager.LoadAsset("Piranha1", asset);
 
-            asset = new Asset(Content.Load<Texture2D>("Piranha2"), 110, 128);
+            asset = new Asset(Content.Load<Texture2D>("Piranha2"), new Vector2(110, 128));
             assetManager.LoadAsset("Piranha2", asset);
 
-            asset = new Asset(Content.Load<Texture2D>("AnglerFish_Lit"), 128, 108);
+            asset = new Asset(Content.Load<Texture2D>("AnglerFish_Lit"), new Vector2(128, 108));
             assetManager.LoadAsset("AnglerFish_Lit", asset);
 
-            asset = new Asset(Content.Load<Texture2D>("AnglerFish_Unlit"), 128, 108);
+            asset = new Asset(Content.Load<Texture2D>("AnglerFish_Unlit"), new Vector2(128, 108));
             assetManager.LoadAsset("AnglerFish_Unlit", asset);
 
-            asset = new Asset(Content.Load<Texture2D>("Bubble"), 32, 32);
+            asset = new Asset(Content.Load<Texture2D>("Bubble"), new Vector2(32, 32));
             assetManager.LoadAsset("Bubble", asset);
 
-            asset = new Asset(Content.Load<Texture2D>("ChickenLeg"), 128, 128);
+            asset = new Asset(Content.Load<Texture2D>("ChickenLeg"), new Vector2(128, 128));
             assetManager.LoadAsset("ChickenLeg", asset);
 
-            asset = new Asset(Content.Load<Texture2D>("DRUM_Red"), 64, 31);
+            asset = new Asset(Content.Load<Texture2D>("DRUM_Red"), new Vector2(64, 31));
             assetManager.LoadAsset("DRUM_Red", asset);
 
-            asset = new Asset(Content.Load<Texture2D>("DRUM_Blue"), 64, 31);
+            asset = new Asset(Content.Load<Texture2D>("DRUM_Blue"), new Vector2(64, 31));
             assetManager.LoadAsset("DRUM_Blue", asset);
 
-            kernel.LoadContent();
+            (kernel as ILoadContent).LoadContent(assetManager);
         }
 
         /// <summary>
@@ -186,7 +189,7 @@ namespace FishORama
                                  null,
                                  Color.White,
                                  0f,
-                                 new Vector2(currentAsset.width / 2, currentAsset.height / 2),
+                                 new Vector2(currentAsset.size.X / 2, currentAsset.size.Y / 2),
                                  new Vector2(1, 1),
                                  SpriteEffects.None,
                                  1);

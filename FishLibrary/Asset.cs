@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace FishLibrary
@@ -11,15 +12,13 @@ namespace FishLibrary
     {
         public Texture2D texture;
 
-        public float width;
-        public float height;
+        public Vector2 size;
 
-        public Asset(Texture2D pTexture, float pWidth, float pHeight)
+        public Asset(Texture2D pTexture, Vector2 pSize)
         {
             texture = pTexture;
 
-            width = pWidth;
-            height = pHeight;
+            size = pSize;
         }
     }
 }

@@ -12,14 +12,14 @@ namespace FishORama
     class Aquarium : ISprite
     {
         private string textureID;
-
         private Vector2 position;
+        private Vector2 size;
         
-        public Aquarium(string pTextureID, Vector2 pPosition)
+        public Aquarium(string pTextureID, Vector2 pPosition, AssetManager pAssetManager)
         {
             textureID = pTextureID;
-
             position = pPosition;
+            size = pAssetManager.GetAssetByID(textureID).size;
         }
 
         public void Update()
@@ -35,7 +35,7 @@ namespace FishORama
                               null,
                               Color.White,
                               0f,
-                              new Vector2(currentAsset.width / 2, currentAsset.height / 2),
+                              new Vector2(currentAsset.size.X / 2, currentAsset.size.Y / 2),
                               new Vector2(1, 1),
                               SpriteEffects.None,
                               1);
