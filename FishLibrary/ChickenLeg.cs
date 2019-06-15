@@ -8,10 +8,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace FishLibrary
 {
-    public class ChickenLeg : IDraw
+    public class ChickenLeg : IDraw, IToken
     {
-        private string textureID;
-        private Vector2 position;
+        private string textureID;       // Holds a string to identify asset used for this token
+        private Vector2 position;       // Holds X and Y coordinates for token position on screen
 
         public string TextureID
         {
@@ -33,17 +33,17 @@ namespace FishLibrary
         /// </summary>
         /// <param name="pAssetManager">Reference to the AssetManager which stores the assets required for drawing</param>
         /// <param name="pSpriteBatch">Reference to an open SpriteBatch, to add this token's texture to</param>
-        public void Draw(AssetManager pAssetManager, SpriteBatch pSpriteBatch)
+        public void Draw(IGetAsset pAssetManager, SpriteBatch pSpriteBatch)
         {
             Asset currentAsset = pAssetManager.GetAssetByID(textureID); // Get this token's asset from the AssetManager
             
             // Draw an image centered at the token's position, using the associated texture
-            pSpriteBatch.Draw(currentAsset.texture,
+            pSpriteBatch.Draw(currentAsset.Texture,
                               position,
                               null,
                               Color.White,
                               0f,
-                              new Vector2(currentAsset.size.X / 2, currentAsset.size.Y / 2),
+                              new Vector2(currentAsset.Size.X / 2, currentAsset.Size.Y / 2),
                               new Vector2(1, 1),
                               SpriteEffects.None,
                               1);

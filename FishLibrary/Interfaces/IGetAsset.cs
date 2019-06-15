@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace FishLibrary
 {
-    public interface ILoadContent
+    public interface IGetAsset
     {
-        void LoadContent(IGetAsset pAssetManager);
+        Asset GetAssetByID(string pKey);
     }
 }

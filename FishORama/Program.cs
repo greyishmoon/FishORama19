@@ -17,12 +17,10 @@ namespace FishORama
         {
             using (var game = new Kernel())
             {
-                IUpdate kernel = new Simulation(game);
+                Simulation kernel = new Simulation(game);
                 game.Simulation = kernel;
                 game.Run();
             }
-                
-                
         }
     }
 #endif

@@ -10,31 +10,39 @@ namespace FishLibrary
 {
     class Aquarium : IDraw
     {
-        private string textureID;
-        private Vector2 position;
-        private Vector2 size;
-        
+        private string textureID;       // Holds a string to identify asset used for this token
+        private Vector2 position;       // Holds X and Y coordinates for token position on screen
+        private Vector2 size;           // Holds the size of the image associated with this token
+
+        /// <summary>
+        /// Aquarium Constructor
+        /// </summary>
+        /// <param name="pTextureID">ID of the texture that should be used for this token</param>
+        /// <param name="pPosition">Starting coordinates of the token</param>
+        /// <param name="pAssetManager">Reference to the AssetManager, used to find the size of the token's visible texture</param>
         public Aquarium(string pTextureID, Vector2 pPosition, AssetManager pAssetManager)
         {
             textureID = pTextureID;
             position = pPosition;
-            size = pAssetManager.GetAssetByID(textureID).size;
+            size = pAssetManager.GetAssetByID(textureID).Size;
         }
 
-        public void Update()
+        /// <summary>
+        /// Draw Method
+        /// </summary>
+        /// <param name="pAssetManager">Reference to the AssetManager which stores the assets required for drawing</param>
+        /// <param name="pSpriteBatch">Reference to an open SpriteBatch, to add this token's texture to</param>
+        public void Draw(IGetAsset pAssetManager, SpriteBatch pSpriteBatch)
         {
-        }
+            Asset currentAsset = pAssetManager.GetAssetByID(textureID); // Get this token's asset from the AssetManager
 
-        public void Draw(AssetManager pAssetManager, SpriteBatch pSpriteBatch)
-        {
-            Asset currentAsset = pAssetManager.GetAssetByID(textureID);
-            
-            pSpriteBatch.Draw(currentAsset.texture,
+            // Draw an image centered at the token's position, using the associated texture
+            pSpriteBatch.Draw(currentAsset.Texture,
                               position,
                               null,
                               Color.White,
                               0f,
-                              new Vector2(currentAsset.size.X / 2, currentAsset.size.Y / 2),
+                              new Vector2(currentAsset.Size.X / 2, currentAsset.Size.Y / 2),
                               new Vector2(1, 1),
                               SpriteEffects.None,
                               1);

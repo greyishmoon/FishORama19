@@ -9,26 +9,21 @@ namespace FishLibrary
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Kernel : Game
+    public class Kernel : Game, IKernel
     {
-        // CLASS VARIABLES
-        // Variables hold the information for the class.
         private GraphicsDeviceManager graphics;     // Used to control the graphics device which draws each frame
         private SpriteBatch spriteBatch;            // Part of the drawing process, used to batch textures together to improve render speed
-        private List<IDraw> drawables;             // List of each token to be drawn each frame
-        private IUpdate simulation;              // Holds a reference to the game simulation to be able to call its Update method each frame
+        private List<IDraw> drawables;              // List of each token to be drawn each frame
+        private IUpdate simulation;                 // Holds a reference to the game simulation to be able to call its Update method each frame
         private AssetManager assetManager;          // Stores every texture that can be used by tokens
         private ChickenLeg chickenLeg;              // Stores a reference to the chicken leg while it's on the screen
         private Camera camera;                      // Every token is drawn in a position relative to this camera
         
-        // CLASS PROPERTIES
-        // Properties expose private variables as public to other classes
         public IUpdate Simulation
         {
             set { simulation = value; }
         }
-
-        public ChickenLeg ChickenLeg
+        public IToken ChickenLeg
         {
             get { return chickenLeg; }
         }
@@ -36,6 +31,8 @@ namespace FishLibrary
         public Kernel()
         {
             graphics = new GraphicsDeviceManager(this);
+
+            // Set display window size
             graphics.PreferredBackBufferWidth = 800;
             graphics.PreferredBackBufferHeight = 600;
 
@@ -53,7 +50,7 @@ namespace FishLibrary
         protected override void Initialize()
         {
             assetManager = new AssetManager();
-            camera = new Camera(new Vector3(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2, 0)); // Create a new camera for centering tokens to the viewpoint
+            camera = new Camera(new Vector3(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2, 0)); // Create a new camera at the center of the viewport
             drawables = new List<IDraw>();
 
             base.Initialize();
@@ -138,7 +135,7 @@ namespace FishLibrary
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+
         }
 
         /// <summary>
@@ -148,18 +145,20 @@ namespace FishLibrary
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            // If a chicken leg is not currently placed and the left mouse button is pressed
             if(chickenLeg == null && Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
+                // Capture the current position of the mouse and align it to the camera
                 Vector2 mousePosition = Mouse.GetState().Position.ToVector2();
-
                 mousePosition.X -= camera.Transform.Translation.X;
                 mousePosition.Y -= camera.Transform.Translation.Y;
 
+                // Place a new chicken leg at the position of the mouse
                 chickenLeg = new ChickenLeg("ChickenLeg", mousePosition);
                 InsertToken(chickenLeg);
             }
 
-            simulation.Update();
+            simulation.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -172,6 +171,7 @@ namespace FishLibrary
         {
             GraphicsDevice.Clear(Color.Black);
 
+            // Start a new batch, aligned to the camera at the center of the viewport
             spriteBatch.Begin(SpriteSortMode.FrontToBack, 
                               null, 
                               null, 
@@ -180,6 +180,7 @@ namespace FishLibrary
                               null, 
                               camera.Transform);
 
+            // Call the draw method for each token in drawables, passing the open sprite batch
             foreach(IDraw Token in drawables)
             {
                 Token.Draw(assetManager, spriteBatch);
@@ -190,16 +191,27 @@ namespace FishLibrary
             base.Draw(gameTime);
         }
 
+        /// <summary>
+        /// Insert a new token into the kernel, so that it can be drawn every frame
+        /// </summary>
+        /// <param name="pToken">The token to be inserted</param>
         public void InsertToken(IDraw pToken)
         {
             drawables.Add(pToken);
         }
 
+        /// <summary>
+        /// Remove an existing token from the kernel, so that its draw method won't be called on future updates
+        /// </summary>
+        /// <param name="pToken">The token to be removed</param>
         public void RemoveToken(IDraw pToken)
         {
             drawables.Remove(pToken);
         }
 
+        /// <summary>
+        /// Removes the chicken leg from the game, if it exists
+        /// </summary>
         public void RemoveChickenLeg()
         {
             if(chickenLeg != null)

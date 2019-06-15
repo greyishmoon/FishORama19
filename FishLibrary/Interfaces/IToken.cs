@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace FishLibrary
 {
-    public interface ILoadContent
+    public interface IToken
     {
-        void LoadContent(IGetAsset pAssetManager);
+        Vector2 Position { get; }
     }
 }

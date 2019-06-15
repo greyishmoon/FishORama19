@@ -9,15 +9,20 @@ namespace FishLibrary
 {
     public class Camera
     {
-        private Matrix transform;
+        private Matrix transform;       // Holds a variety of positional information about the camera, including scale and rotation
+
         public Matrix Transform
         {
             get { return transform; }
         }
 
+        /// <summary>
+        /// Camera Constructor
+        /// </summary>
+        /// <param name="pCameraPosition">Initial position of the camera</param>
         public Camera(Vector3 pCameraPosition)
         {
-            transform = Matrix.CreateTranslation(pCameraPosition);
+            transform = Matrix.CreateTranslation(pCameraPosition); // Create a new translation matrix from pCameraPosition
         }
     }
 }

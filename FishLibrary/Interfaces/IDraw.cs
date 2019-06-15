@@ -9,6 +9,6 @@ namespace FishLibrary
 {
     public interface IDraw
     {
-        void Draw(AssetManager pAssets, SpriteBatch pSpriteBatch);
+        void Draw(IGetAsset pAssets, SpriteBatch pSpriteBatch);
     }
 }
