@@ -9,26 +9,31 @@ namespace FishLibrary
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Simulation : Game
+    public class Kernel : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-
-        List<ISprite> Drawables = new List<ISprite>();
-
-        IUpdatable kernel;
-        public IUpdatable Kernel
+        // CLASS VARIABLES
+        // Variables hold the information for the class.
+        private GraphicsDeviceManager graphics;     // Used to control the graphics device which draws each frame
+        private SpriteBatch spriteBatch;            // Part of the drawing process, used to batch textures together to improve render speed
+        private List<IDraw> drawables;             // List of each token to be drawn each frame
+        private IUpdate simulation;              // Holds a reference to the game simulation to be able to call its Update method each frame
+        private AssetManager assetManager;          // Stores every texture that can be used by tokens
+        private ChickenLeg chickenLeg;              // Stores a reference to the chicken leg while it's on the screen
+        private Camera camera;                      // Every token is drawn in a position relative to this camera
+        
+        // CLASS PROPERTIES
+        // Properties expose private variables as public to other classes
+        public IUpdate Simulation
         {
-            set { kernel = value; }
+            set { simulation = value; }
         }
 
-        AssetManager assetManager;
+        public ChickenLeg ChickenLeg
+        {
+            get { return chickenLeg; }
+        }
 
-        ChickenLeg chickenLeg;
-
-        Camera camera;
-
-        public Simulation()
+        public Kernel()
         {
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 800;
@@ -48,8 +53,8 @@ namespace FishLibrary
         protected override void Initialize()
         {
             assetManager = new AssetManager();
-
-            camera = new Camera(new Vector3(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2, 0));
+            camera = new Camera(new Vector3(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2, 0)); // Create a new camera for centering tokens to the viewpoint
+            drawables = new List<IDraw>();
 
             base.Initialize();
         }
@@ -66,7 +71,7 @@ namespace FishLibrary
             spriteBatch = new SpriteBatch(GraphicsDevice);
             
 
-            /// Load each texture into the AssetManager as an Asset
+            // Load each texture into the AssetManager as an Asset
             Asset asset;
 
             asset = new Asset(Content.Load<Texture2D>("Background"), new Vector2(800, 600));
@@ -120,7 +125,11 @@ namespace FishLibrary
             asset = new Asset(Content.Load<Texture2D>("DRUM_Blue"), new Vector2(64, 31));
             assetManager.LoadAsset("DRUM_Blue", asset);
 
-            (kernel as ILoadContent).LoadContent(assetManager);
+            // Create a new Aquarium to act as the background for the game
+            Aquarium aquarium = new Aquarium("AquariumBackground", new Vector2(0, 0), assetManager);
+            InsertToken(aquarium);
+
+            (simulation as ILoadContent).LoadContent(assetManager); // Call the kernel's LoadContent method, for it to create tokens and add them to the game
         }
 
         /// <summary>
@@ -139,9 +148,6 @@ namespace FishLibrary
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
             if(chickenLeg == null && Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
                 Vector2 mousePosition = Mouse.GetState().Position.ToVector2();
@@ -150,9 +156,10 @@ namespace FishLibrary
                 mousePosition.Y -= camera.Transform.Translation.Y;
 
                 chickenLeg = new ChickenLeg("ChickenLeg", mousePosition);
+                InsertToken(chickenLeg);
             }
 
-            kernel.Update();
+            simulation.Update();
 
             base.Update(gameTime);
         }
@@ -173,26 +180,9 @@ namespace FishLibrary
                               null, 
                               camera.Transform);
 
-            foreach(ISprite sprite in Drawables)
+            foreach(IDraw Token in drawables)
             {
-                sprite.Draw(assetManager, spriteBatch);
-            }
-
-            Asset currentAsset;
-            
-            if(chickenLeg != null)
-            {
-                currentAsset = assetManager.GetAssetByID(chickenLeg.TextureID);
-
-                spriteBatch.Draw(currentAsset.texture,
-                                 chickenLeg.Position,
-                                 null,
-                                 Color.White,
-                                 0f,
-                                 new Vector2(currentAsset.size.X / 2, currentAsset.size.Y / 2),
-                                 new Vector2(1, 1),
-                                 SpriteEffects.None,
-                                 1);
+                Token.Draw(assetManager, spriteBatch);
             }
 
             spriteBatch.End();
@@ -200,9 +190,23 @@ namespace FishLibrary
             base.Draw(gameTime);
         }
 
-        public void InsertSprite(ISprite pSprite)
+        public void InsertToken(IDraw pToken)
         {
-            Drawables.Add(pSprite);
+            drawables.Add(pToken);
+        }
+
+        public void RemoveToken(IDraw pToken)
+        {
+            drawables.Remove(pToken);
+        }
+
+        public void RemoveChickenLeg()
+        {
+            if(chickenLeg != null)
+            {
+                RemoveToken(chickenLeg);
+                chickenLeg = null;
+            }
         }
     }
 }

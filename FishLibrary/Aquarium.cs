@@ -5,11 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using FishLibrary;
 
-namespace FishORama
+namespace FishLibrary
 {
-    class Aquarium : ISprite
+    class Aquarium : IDraw
     {
         private string textureID;
         private Vector2 position;

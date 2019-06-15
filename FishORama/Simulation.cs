@@ -9,24 +9,21 @@ namespace FishORama
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Kernel : IUpdatable, ILoadContent
+    public class Simulation : IUpdate, ILoadContent
     {
-        private Simulation simulation;
+        private Kernel kernel;
 
         OrangeFish orangeFish1;
 
-        public Kernel(Simulation pSimulation)
+        public Simulation(Kernel pKernel)
         {
-            simulation = pSimulation;
+            kernel = pKernel;
         }
         
         public void LoadContent(AssetManager pAssetManager)
         {
-            Aquarium aquarium = new Aquarium("AquariumBackground", new Vector2(0, 0), pAssetManager);
-            simulation.InsertSprite(aquarium);
-
             orangeFish1 = new OrangeFish("OrangeFish", new Vector2(0, 0), pAssetManager);
-            simulation.InsertSprite(orangeFish1);
+            kernel.InsertToken(orangeFish1);
         }
 
         public void Update()

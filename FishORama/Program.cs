@@ -1,6 +1,7 @@
 ﻿using System;
+using FishLibrary;
 
-namespace FishLibrary
+namespace FishORama
 {
 #if WINDOWS || LINUX
     /// <summary>
@@ -14,6 +15,14 @@ namespace FishLibrary
         [STAThread]
         static void Main()
         {
+            using (var game = new Kernel())
+            {
+                IUpdate kernel = new Simulation(game);
+                game.Simulation = kernel;
+                game.Run();
+            }
+                
+                
         }
     }
 #endif

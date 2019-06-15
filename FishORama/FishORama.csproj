@@ -35,19 +35,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Program\AppInfo\Icon.ico</ApplicationIcon>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationManifest>Program\AppInfo\app.manifest</ApplicationManifest>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Aquarium.cs" />
-    <Compile Include="Kernel.cs" />
+    <Compile Include="Simulation.cs" />
     <Compile Include="OrangeFish.cs" />
-    <Compile Include="Program\Program.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -58,15 +57,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Program\AppInfo\Icon.ico" />
+    <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
-    <None Include="Program\AppInfo\app.manifest" />
+    <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FishLibrary\FishLibrary.csproj">
-      <Project>{76ee30da-d698-4aa4-96eb-863a9f6d6426}</Project>
+      <Project>{b16a7ff5-52a6-486e-9d6d-64c7dcad4e01}</Project>
       <Name>FishLibrary</Name>
     </ProjectReference>
   </ItemGroup>
