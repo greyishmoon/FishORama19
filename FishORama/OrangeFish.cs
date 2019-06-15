@@ -9,42 +9,39 @@ using FishLibrary;
 
 namespace FishORama
 {
+    /// CLASS: OrangeFish - this class is structured as a FishORama engine Token class
+    /// It contains all the elements required to draw a token to screen and update it (for movement etc)
     class OrangeFish : IDraw
     {
         // CLASS VARIABLES
-        // Variables hold the information for the class.
+        // Variables hold the information for the class
+        // NOTE - these variables must be present for the class to act as a TOKEN for the FishORama engine
         private string textureID;       // Holds a string to identify asset used for this token
         private Vector2 position;       // Holds X and Y coordinates for token position on screen
         private Vector2 direction;      // Holds the direction the fish is currently facing, both X and Y values should be either -1 (left or up) or 1 (right or down)
-        private Vector2 size;           // Holds the size of the image associated with this token
+        private Vector2 size;           // Holds the size of the image associated with this token (x and y values)
 
-        /// <summary>
-        /// OrangeFish Constructor
-        /// </summary>
-        /// <param name="pTextureID">ID of the texture that should be used for this token</param>
-        /// <param name="pPosition">Starting coordinates of the token</param>
-        /// <param name="pAssetManager">Reference to the AssetManager, used to find the size of the token's visible texture</param>
+        /// CONSTRUCTOR: OrangeFish Constructor
+        /// The elements in the brackets are PARAMETERS, which will be covered later in the course
         public OrangeFish(string pTextureID, Vector2 pPosition, IGetAsset pAssetManager)
         {
+            // State initialisation (setup) for the object
             textureID = pTextureID;
             position = pPosition;
             direction = new Vector2(1, 1);
             size = pAssetManager.GetAssetByID(textureID).Size;
         }
 
-        /// <summary>
-        /// Update Method
-        /// </summary>
+        /// METHOD: Update - Called repeatedly by the Update loop in Simulation
+        /// Write the movement control code here
         public void Update()
         {
             position.X += direction.X;
         }
 
-        /// <summary>
-        /// Draw Method
-        /// </summary>
-        /// <param name="pAssetManager">Reference to the AssetManager which stores the assets required for drawing</param>
-        /// <param name="pSpriteBatch">Reference to an open SpriteBatch, to add this token's texture to</param>
+        /// METHOD: Draw - Called repeatedly by FishORama engine to draw token on screen
+        /// DO NOT ALTER, and ensure this Draw method is in each token (fish) class
+        /// Comments explain the code - read and try and understand each lines purpose
         public void Draw(IGetAsset pAssetManager, SpriteBatch pSpriteBatch)
         {
             Asset currentAsset = pAssetManager.GetAssetByID(textureID); // Get this token's asset from the AssetManager

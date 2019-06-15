@@ -6,44 +6,39 @@ using FishLibrary;
 
 namespace FishORama
 {
-    /// <summary>
-    /// This is the main type for your game.
-    /// </summary>
+    /// CLASS: Simulation class - the main class users code in to set up a FishORama simulation
+    /// All tokens to be displayed in the scene are added here
     public class Simulation : IUpdate, ILoadContent
     {
         // CLASS VARIABLES
-        // Variables hold the information for the class.
+        // Variables store the information for the class
         private IKernel kernel;     // Holds a reference to the kernel which calls the draw method for every token you add to it
 
+        // EXAMPLE: DECLARATION of an OrangeFish variable that will hold an OrangeFish object
         OrangeFish orangeFish1;
 
-        /// <summary>
-        /// Simulation Constructor
-        /// </summary>
-        /// <param name="pKernel">The game's Kernel</param>
+        /// CONSTRUCTOR - for the Simulation class - run once only when an object of the Simulation class is INSTANTIATED (created)
+        /// Use constructors to set up the state of a class
         public Simulation(IKernel pKernel)
         {
-            kernel = pKernel; // Stores the kernel passed to the constructor when this class is created
+            kernel = pKernel;       // Stores the kernel which is passed to the constructor when this class is created
         }
 
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
-        /// <param name="pAssetManager">Asset manager containing the assets used by each token</param>
+        /// METHOD: LoadContent - called once at start of program
+        /// Create all token objects and 'insert' them into the FishORama engine
         public void LoadContent(IGetAsset pAssetManager)
         {
+            // EXAMPLE: CREATION of a new OrangeFish object, INITIALISATION of the orangeFish1 variable
+            // and insertion of the OrangeFish object into the FishORama engine
             orangeFish1 = new OrangeFish("OrangeFish", new Vector2(0, 0), pAssetManager);
             kernel.InsertToken(orangeFish1);
         }
 
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        /// METHOD: Update - called 60 times a second by the FishORama engine when the program is running
+        /// Add all tokens so Update is called on them regularly
         public void Update(GameTime gameTime)
         {
+            // EXAMPLE: Calling Update() on the example OrangeFish object
             orangeFish1.Update();
         }
     }
