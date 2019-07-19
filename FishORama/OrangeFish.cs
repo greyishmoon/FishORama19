@@ -30,6 +30,11 @@ namespace FishORama
             position = pPosition;
             direction = new Vector2(1, 1);
             size = pAssetManager.GetAssetByID(textureID).Size;
+
+            // *** ADD OTHER INITIALISATION (class setup) CODE HERE ***
+
+
+            
         }
 
         /// METHOD: Update - Called repeatedly by the Update loop in Simulation
@@ -37,6 +42,11 @@ namespace FishORama
         public void Update()
         {
             position.X += direction.X;
+
+            // *** ADD YOUR MOVEMENT/BEHAVIOUR CODE HERE ***
+
+
+
         }
 
         /// METHOD: Draw - Called repeatedly by FishORama engine to draw token on screen

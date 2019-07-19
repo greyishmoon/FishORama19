@@ -17,6 +17,11 @@ namespace FishORama
         // EXAMPLE: DECLARATION of an OrangeFish variable that will hold an OrangeFish object
         OrangeFish orangeFish1;
 
+        // *** ADD YOUR CLASS VARIABLES HERE ***
+
+        
+        
+        
         /// CONSTRUCTOR - for the Simulation class - run once only when an object of the Simulation class is INSTANTIATED (created)
         /// Use constructors to set up the state of a class
         public Simulation(IKernel pKernel)
@@ -32,6 +37,11 @@ namespace FishORama
             // and insertion of the OrangeFish object into the FishORama engine
             orangeFish1 = new OrangeFish("OrangeFish", new Vector2(0, 0), pAssetManager);
             kernel.InsertToken(orangeFish1);
+
+            // *** ADD YOUR NEW TOKEN CREATION CODE HERE ***
+
+
+
         }
 
         /// METHOD: Update - called 60 times a second by the FishORama engine when the program is running
@@ -40,6 +50,11 @@ namespace FishORama
         {
             // EXAMPLE: Calling Update() on the example OrangeFish object
             orangeFish1.Update();
+
+            // *** ADD YOUR UPDATE CODE HERE ***
+
+
+
         }
     }
 }
