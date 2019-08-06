@@ -15,6 +15,8 @@ namespace FishORama
         private IKernel kernel;         // Holds a reference to the game engine kernel which calls the draw method for every token you add to it
         private Screen screen;          // Holds a reference to the screeen dimensions (width, height)
         private IToken chickenLeg;      // Holds a reference to the chicken leg variable
+        private int testNum;
+        bool firstRun = true;
 
         // *** ADD YOUR CLASS VARIABLES HERE ***
 
@@ -29,7 +31,8 @@ namespace FishORama
         {
             kernel = pKernel;       // Stores the game engine kernel which is passed to the constructor when this class is created
             screen = kernel.Screen;
-            chickenLeg = kernel.ChickenLeg;
+            
+            
         }
 
         /// METHOD: LoadContent - called once at start of program
@@ -45,20 +48,30 @@ namespace FishORama
 
 
 
-
+            //chickenLeg = kernel.ChickenLeg;
         }
 
         /// METHOD: Update - called 60 times a second by the FishORama engine when the program is running
         /// Add all tokens so Update is called on them regularly
         public void Update(GameTime gameTime)
         {
+            if (firstRun)
+            {
+                chickenLeg = kernel.ChickenLeg;
+            }
 
             // *** ADD YOUR UPDATE CODE HERE ***
 
             // EXAMPLE: Calling Update() on the example OrangeFish object
             orangeFish1.Update();
 
+            //Console.WriteLine(kernel.ChickenLeg);
+            //Console.WriteLine(chickenLeg);
 
+            //if (kernel.ChickenLeg != null)
+            //{
+            //    Console.WriteLine("SFSG");
+            //}
 
 
         }

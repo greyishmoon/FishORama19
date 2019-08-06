@@ -19,7 +19,7 @@ namespace FishLibrary
         private ChickenLeg chickenLeg;              // Stores a reference to the chicken leg while it's on the screen
         private Camera camera;                      // Every token is drawn in a position relative to this camera
         private Screen screen;
-
+        private int testnum = 2;
 
 
 
@@ -34,6 +34,11 @@ namespace FishLibrary
         public Screen Screen
         {
             get { return screen; }
+        }
+
+        public int TestNum
+        {
+            get { return testnum; }
         }
 
         public Kernel()
@@ -62,7 +67,7 @@ namespace FishLibrary
             assetManager = new AssetManager();
             camera = new Camera(new Vector3(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2, 0)); // Create a new camera at the center of the viewport
             drawables = new List<IDraw>();
-            
+          
             base.Initialize();
 
         }
@@ -167,9 +172,11 @@ namespace FishLibrary
                 // Place a new chicken leg at the position of the mouse
                 chickenLeg = new ChickenLeg("ChickenLeg", mousePosition);
                 InsertToken(chickenLeg);
+
+                testnum = 5;
             }
 
-            // Poll chicken leg if present and check remove flag - reomve if true
+            // Poll chicken leg if present and check remove flag - remove if true
             if (chickenLeg != null)
             {
                 if (chickenLeg.RemoveFlag)
@@ -177,6 +184,8 @@ namespace FishLibrary
                     RemoveChickenLeg();
                 }
             }
+
+            
 
             simulation.Update(gameTime);
 

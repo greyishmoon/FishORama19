@@ -57,12 +57,9 @@ namespace FishORama
             // *** ADD YOUR MOVEMENT/BEHAVIOUR CODE HERE ***
             xPosition += xDirection;
 
-            if (chickenLeg != null)
-            {
-                Console.WriteLine("asdasd");
-            }
+            Console.WriteLine(chickenLeg);
 
-            
+
 
         }
 
