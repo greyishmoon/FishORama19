@@ -12,8 +12,9 @@ namespace FishORama
     {
         // CLASS VARIABLES
         // Variables store the information for the class
-        private IKernel kernel;     // Holds a reference to the game engine kernel which calls the draw method for every token you add to it
-        private Viewport screen;
+        private IKernel kernel;         // Holds a reference to the game engine kernel which calls the draw method for every token you add to it
+        private Screen screen;          // Holds a reference to the screeen dimensions (width, height)
+        private IToken chickenLeg;      // Holds a reference to the chicken leg variable
 
         // *** ADD YOUR CLASS VARIABLES HERE ***
 
@@ -28,6 +29,7 @@ namespace FishORama
         {
             kernel = pKernel;       // Stores the game engine kernel which is passed to the constructor when this class is created
             screen = kernel.Screen;
+            chickenLeg = kernel.ChickenLeg;
         }
 
         /// METHOD: LoadContent - called once at start of program
@@ -38,7 +40,7 @@ namespace FishORama
 
             // EXAMPLE: CREATION of a new OrangeFish object, INITIALISATION of the orangeFish1 variable
             // and insertion of the OrangeFish object into the FishORama engine
-            orangeFish1 = new OrangeFish("OrangeFish", 0, 0, screen);
+            orangeFish1 = new OrangeFish("OrangeFish", 0, 0, screen, chickenLeg);
             kernel.InsertToken(orangeFish1);
 
 

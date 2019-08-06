@@ -12,6 +12,7 @@ namespace FishLibrary
     {
         private string textureID;       // Holds a string to identify asset used for this token
         private Vector2 position;       // Holds X and Y coordinates for token position on screen
+        private bool removeFlag;            // Flag  - remove chickenLeg of true (polled by kernel update)
 
         public string TextureID
         {
@@ -22,10 +23,21 @@ namespace FishLibrary
             get { return position; }
         }
 
+        public bool RemoveFlag
+        {
+            get { return removeFlag; }
+        }
+
         public ChickenLeg(string pTextureID, Vector2 pPosition)
         {
             textureID = pTextureID;
             position = pPosition;
+            removeFlag = false;
+        }
+
+        public void Remove()
+        {
+            removeFlag = true;
         }
 
         /// <summary>

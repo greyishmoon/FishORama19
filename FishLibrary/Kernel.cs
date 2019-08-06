@@ -18,9 +18,9 @@ namespace FishLibrary
         private AssetManager assetManager;          // Stores every texture that can be used by tokens
         private ChickenLeg chickenLeg;              // Stores a reference to the chicken leg while it's on the screen
         private Camera camera;                      // Every token is drawn in a position relative to this camera
-        private Viewport screen;
+        private Screen screen;
 
-        DisplayMode test;
+
 
 
         public IUpdate Simulation
@@ -31,7 +31,7 @@ namespace FishLibrary
         {
             get { return chickenLeg; }
         }
-        public Viewport Screen
+        public Screen Screen
         {
             get { return screen; }
         }
@@ -40,16 +40,13 @@ namespace FishLibrary
         {
             graphics = new GraphicsDeviceManager(this);
 
+            screen = new Screen(800, 600);
+
             // Set display window size
-            graphics.PreferredBackBufferWidth = 800;
-            graphics.PreferredBackBufferHeight = 600;
+            graphics.PreferredBackBufferWidth = screen.width;
+            graphics.PreferredBackBufferHeight = screen.height;
 
             Content.RootDirectory = "Content";
-
-            test = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode;
-            int x = test.Width;
-            int w = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-            int h = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 
             IsMouseVisible = true;
         }
@@ -66,9 +63,8 @@ namespace FishLibrary
             camera = new Camera(new Vector3(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2, 0)); // Create a new camera at the center of the viewport
             drawables = new List<IDraw>();
             
-
             base.Initialize();
-            screen = GraphicsDevice.Viewport;
+
         }
 
         /// <summary>
@@ -173,6 +169,15 @@ namespace FishLibrary
                 InsertToken(chickenLeg);
             }
 
+            // Poll chicken leg if present and check remove flag - reomve if true
+            if (chickenLeg != null)
+            {
+                if (chickenLeg.RemoveFlag)
+                {
+                    RemoveChickenLeg();
+                }
+            }
+
             simulation.Update(gameTime);
 
             base.Update(gameTime);
@@ -234,6 +239,17 @@ namespace FishLibrary
                 RemoveToken(chickenLeg);
                 chickenLeg = null;
             }
+        }
+    }
+
+    public struct Screen
+    {
+        public int width, height;
+
+        public Screen(int p1, int p2)
+        {
+            width = p1;
+            height = p2;
         }
     }
 }
