@@ -21,12 +21,17 @@ namespace FishORama
         private int yPosition;          // Holds the X coordinate for token position on screen
         private int xDirection;         // Holds the direction the token is currently moving - X value should be either -1 (left) or 1 (right)
         private int yDirection;         // Holds the direction the token is currently moving - Y value should be either -1 (down) or 1 (up)
-        private Vector2 size;           // Holds the size of the image associated with this token (x and y values)
-        private IKernel gameKernel;     // Holds a reference to the main game kernel for access to screen size and chickenLeg methods
+        private Viewport screen;        // Holds a reference to the screen dimansions (width and height)
+
+
+        // *** ADD YOUR CLASS VARIABLES HERE ***
+
+
+
 
         /// CONSTRUCTOR: OrangeFish Constructor
         /// The elements in the brackets are PARAMETERS, which will be covered later in the course
-        public OrangeFish(string pTextureID, int pXpos, int pYpos, IGetAsset pAssetManager, IKernel pKernel)
+        public OrangeFish(string pTextureID, int pXpos, int pYpos, Viewport pScreen)
         {
             // State initialisation (setup) for the object
             textureID = pTextureID;
@@ -34,8 +39,7 @@ namespace FishORama
             yPosition = pYpos;
             xDirection = 1;
             yDirection = 1;
-            size = pAssetManager.GetAssetByID(textureID).Size;
-            gameKernel = pKernel;
+            screen = pScreen;
 
             // *** ADD OTHER INITIALISATION (class setup) CODE HERE ***
 
@@ -51,7 +55,7 @@ namespace FishORama
             // *** ADD YOUR MOVEMENT/BEHAVIOUR CODE HERE ***
             xPosition += xDirection;
 
-            Console.WriteLine(gameKernel.Screen.Height);
+            Console.WriteLine(screen.Width);
 
         }
 

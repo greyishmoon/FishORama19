@@ -10,7 +10,7 @@ namespace FishLibrary
     public interface IKernel
     {
         IToken ChickenLeg { get; }
-        DisplayMode Screen { get; }
+        Viewport Screen { get; }
 
         void InsertToken(IDraw pToken);
         void RemoveToken(IDraw pToken);

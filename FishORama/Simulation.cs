@@ -13,23 +13,21 @@ namespace FishORama
         // CLASS VARIABLES
         // Variables store the information for the class
         private IKernel kernel;     // Holds a reference to the game engine kernel which calls the draw method for every token you add to it
-
+        private Viewport screen;
 
         // *** ADD YOUR CLASS VARIABLES HERE ***
 
         // EXAMPLE: DECLARATION of an OrangeFish variable that will hold an OrangeFish object
         OrangeFish orangeFish1;
-        
-        
 
-
-
+     
 
         /// CONSTRUCTOR - for the Simulation class - run once only when an object of the Simulation class is INSTANTIATED (created)
         /// Use constructors to set up the state of a class
         public Simulation(IKernel pKernel)
         {
             kernel = pKernel;       // Stores the game engine kernel which is passed to the constructor when this class is created
+            screen = kernel.Screen;
         }
 
         /// METHOD: LoadContent - called once at start of program
@@ -40,8 +38,9 @@ namespace FishORama
 
             // EXAMPLE: CREATION of a new OrangeFish object, INITIALISATION of the orangeFish1 variable
             // and insertion of the OrangeFish object into the FishORama engine
-            orangeFish1 = new OrangeFish("OrangeFish", 0, 0, pAssetManager, kernel);
+            orangeFish1 = new OrangeFish("OrangeFish", 0, 0, screen);
             kernel.InsertToken(orangeFish1);
+
 
 
 
@@ -56,6 +55,8 @@ namespace FishORama
 
             // EXAMPLE: Calling Update() on the example OrangeFish object
             orangeFish1.Update();
+
+
 
 
         }

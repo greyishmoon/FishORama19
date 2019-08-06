@@ -18,6 +18,7 @@ namespace FishLibrary
         private AssetManager assetManager;          // Stores every texture that can be used by tokens
         private ChickenLeg chickenLeg;              // Stores a reference to the chicken leg while it's on the screen
         private Camera camera;                      // Every token is drawn in a position relative to this camera
+        private Viewport screen;
 
         DisplayMode test;
 
@@ -30,9 +31,9 @@ namespace FishLibrary
         {
             get { return chickenLeg; }
         }
-        public DisplayMode Screen
+        public Viewport Screen
         {
-            get { return GraphicsAdapter.DefaultAdapter.CurrentDisplayMode; }
+            get { return screen; }
         }
 
         public Kernel()
@@ -64,8 +65,10 @@ namespace FishLibrary
             assetManager = new AssetManager();
             camera = new Camera(new Vector3(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2, 0)); // Create a new camera at the center of the viewport
             drawables = new List<IDraw>();
+            
 
             base.Initialize();
+            screen = GraphicsDevice.Viewport;
         }
 
         /// <summary>
