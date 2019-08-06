@@ -13,11 +13,11 @@ namespace FishORama
         [STAThread]
         static void Main()
         {
-            using (var game = new Kernel())
+            using (var kernel = new Kernel())
             {
-                Simulation kernel = new Simulation(game);
-                game.Simulation = kernel;
-                game.Run();
+                Simulation sim = new Simulation(kernel);
+                kernel.Simulation = sim;
+                kernel.Run();
             }
         }
     }

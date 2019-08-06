@@ -64,9 +64,9 @@
     <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FishLibrary\FishLibrary.csproj">
+    <ProjectReference Include="..\FishLibrary\FishORamaEngineLibrary.csproj">
       <Project>{b16a7ff5-52a6-486e-9d6d-64c7dcad4e01}</Project>
-      <Name>FishLibrary</Name>
+      <Name>FishORamaEngineLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

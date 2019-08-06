@@ -18,7 +18,10 @@ namespace FishLibrary
         private AssetManager assetManager;          // Stores every texture that can be used by tokens
         private ChickenLeg chickenLeg;              // Stores a reference to the chicken leg while it's on the screen
         private Camera camera;                      // Every token is drawn in a position relative to this camera
-        
+
+        DisplayMode test;
+
+
         public IUpdate Simulation
         {
             set { simulation = value; }
@@ -26,6 +29,10 @@ namespace FishLibrary
         public IToken ChickenLeg
         {
             get { return chickenLeg; }
+        }
+        public DisplayMode Screen
+        {
+            get { return GraphicsAdapter.DefaultAdapter.CurrentDisplayMode; }
         }
 
         public Kernel()
@@ -37,6 +44,11 @@ namespace FishLibrary
             graphics.PreferredBackBufferHeight = 600;
 
             Content.RootDirectory = "Content";
+
+            test = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode;
+            int x = test.Width;
+            int w = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            int h = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 
             IsMouseVisible = true;
         }

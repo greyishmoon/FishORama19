@@ -12,33 +12,36 @@ namespace FishORama
     {
         // CLASS VARIABLES
         // Variables store the information for the class
-        private IKernel kernel;     // Holds a reference to the kernel which calls the draw method for every token you add to it
+        private IKernel kernel;     // Holds a reference to the game engine kernel which calls the draw method for every token you add to it
 
-        // EXAMPLE: DECLARATION of an OrangeFish variable that will hold an OrangeFish object
-        OrangeFish orangeFish1;
 
         // *** ADD YOUR CLASS VARIABLES HERE ***
 
+        // EXAMPLE: DECLARATION of an OrangeFish variable that will hold an OrangeFish object
+        OrangeFish orangeFish1;
         
         
-        
+
+
+
+
         /// CONSTRUCTOR - for the Simulation class - run once only when an object of the Simulation class is INSTANTIATED (created)
         /// Use constructors to set up the state of a class
         public Simulation(IKernel pKernel)
         {
-            kernel = pKernel;       // Stores the kernel which is passed to the constructor when this class is created
+            kernel = pKernel;       // Stores the game engine kernel which is passed to the constructor when this class is created
         }
 
         /// METHOD: LoadContent - called once at start of program
         /// Create all token objects and 'insert' them into the FishORama engine
         public void LoadContent(IGetAsset pAssetManager)
         {
+            // *** ADD YOUR NEW TOKEN CREATION CODE HERE ***
+
             // EXAMPLE: CREATION of a new OrangeFish object, INITIALISATION of the orangeFish1 variable
             // and insertion of the OrangeFish object into the FishORama engine
-            orangeFish1 = new OrangeFish("OrangeFish", new Vector2(0, 0), pAssetManager);
+            orangeFish1 = new OrangeFish("OrangeFish", 0, 0, pAssetManager, kernel);
             kernel.InsertToken(orangeFish1);
-
-            // *** ADD YOUR NEW TOKEN CREATION CODE HERE ***
 
 
 
@@ -48,11 +51,11 @@ namespace FishORama
         /// Add all tokens so Update is called on them regularly
         public void Update(GameTime gameTime)
         {
-            // EXAMPLE: Calling Update() on the example OrangeFish object
-            orangeFish1.Update();
 
             // *** ADD YOUR UPDATE CODE HERE ***
 
+            // EXAMPLE: Calling Update() on the example OrangeFish object
+            orangeFish1.Update();
 
 
         }

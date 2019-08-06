@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.645
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FishORama", "FishORama\FishORama.csproj", "{7B3E7EC1-0848-41D7-8E05-7E0A2CE3CF36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FishLibrary", "FishLibrary\FishLibrary.csproj", "{B16A7FF5-52A6-486E-9D6D-64C7DCAD4E01}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FishORamaEngineLibrary", "FishLibrary\FishORamaEngineLibrary.csproj", "{B16A7FF5-52A6-486E-9D6D-64C7DCAD4E01}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
