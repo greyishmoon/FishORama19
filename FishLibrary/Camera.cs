@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 namespace FishLibrary
 {
     /// <summary>
-    /// Camera class manages the camera position and geometry
+    /// Camera class - manages the camera position and geometry
     /// </summary>
     public class Camera
     {

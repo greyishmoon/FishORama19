@@ -10,7 +10,7 @@ namespace FishLibrary
 {
 
     /// <summary>
-    /// Asset class which stores the texture assets loaded into the game engine
+    /// Asset class - which stores the texture assets loaded into the game engine
     /// </summary>
     public class Asset
     {

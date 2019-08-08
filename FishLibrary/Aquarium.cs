@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace FishLibrary
 {
     /// <summary>
-    /// A drawable Token that provides the aquarium background image
+    /// Aquarium class - A drawable Token that provides the aquarium background image
     /// </summary>
     class Aquarium : IDraw
     {

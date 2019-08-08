@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 namespace FishLibrary
 {
     /// <summary>
-    /// This is the main class for your game.
+    /// Kernel class - This is the main class for your game.
     /// </summary>
     public class Kernel : Game, IKernel
     {
@@ -224,7 +224,7 @@ namespace FishLibrary
         }
 
         /// <summary>
-        /// Removes the chicken leg from the game, if it exists
+        /// RemoveChickenLeg method - Removes the chicken leg from the game, if it exists
         /// </summary>
         private void RemoveChickenLeg()
         {

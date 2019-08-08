@@ -5,5 +5,6 @@
         ChickenLeg ChickenLeg { get; }
 
         void SetChickenLeg(ChickenLeg pChickenLeg);
+        void RemoveChickenLeg();
     }
 }

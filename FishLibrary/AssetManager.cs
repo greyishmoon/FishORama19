@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace FishLibrary
 {
     /// <summary>
-    /// Asset manager to store a dictionary of drawable assets injected into the game at run time
+    /// AssetManager class - Asset manager to store a dictionary of drawable assets injected into the game at run time
     /// </summary>
     public class AssetManager : IGetAsset
     {

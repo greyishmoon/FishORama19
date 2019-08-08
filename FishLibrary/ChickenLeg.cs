@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace FishLibrary
 {
     /// <summary>
-    /// ChickenLeg class for representation of fish food in scene
+    /// ChickenLeg class - for representation of fish food in scene
     /// </summary>
     public class ChickenLeg : IDraw, IToken
     {

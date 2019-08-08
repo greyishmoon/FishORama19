@@ -62,7 +62,7 @@ namespace FishORama
             if (xPosition > screen.width / 2)
             {
                 xDirection *= -1;
-                tokenManager.ChickenLeg.Remove();
+                tokenManager.RemoveChickenLeg();
             }
 
 

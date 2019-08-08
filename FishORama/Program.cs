@@ -5,7 +5,7 @@ namespace FishORama
 {
 #if WINDOWS || LINUX
 
-    /// CLASS: Program
+    /// CLASS: Program - the executable class for the project
     public static class Program
     {
 
