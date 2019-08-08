@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 namespace FishLibrary
 {
+    /// <summary>
+    /// Asset manager to store a dictionary of drawable assets injected into the game at run time
+    /// </summary>
     public class AssetManager : IGetAsset
     {
         private Dictionary<string, Asset> assets;       // A collection of key/value pairs representing each asset ID and the asset associated with it
 
         /// <summary>
-        /// Asset Manager Constructor
+        /// AssetManager Constructor
         /// </summary>
         public AssetManager()
         {
@@ -19,7 +22,7 @@ namespace FishLibrary
         }
 
         /// <summary>
-        /// Load a new asset into the manager's list
+        /// LoadAsset method - Load a new asset into the manager's list
         /// </summary>
         /// <param name="pKey">ID to associate with the asset</param>
         /// <param name="pAsset">Asset object to be added to the list</param>
@@ -29,7 +32,7 @@ namespace FishLibrary
         }
 
         /// <summary>
-        /// Get an asset from the manager's list
+        /// GetAssetByID method - Get an asset from the manager's list
         /// </summary>
         /// <param name="pKey">ID of the asset to retrieve</param>
         /// <returns>The asset object associated with the given ID</returns>

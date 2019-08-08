@@ -9,12 +9,9 @@ namespace FishLibrary
 {
     public interface IKernel
     {
-        IToken ChickenLeg { get; }
         Screen Screen { get; }
-        int TestNum { get; }
 
         void InsertToken(IDraw pToken);
         void RemoveToken(IDraw pToken);
-        void RemoveChickenLeg();
     }
 }

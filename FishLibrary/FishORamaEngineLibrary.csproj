@@ -54,8 +54,10 @@
     <Compile Include="Interfaces\IDraw.cs" />
     <Compile Include="Interfaces\IToken.cs" />
     <Compile Include="Interfaces\IUpdate.cs" />
+    <Compile Include="Interfaces\ITokenManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Kernel.cs" />
+    <Compile Include="TokenManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

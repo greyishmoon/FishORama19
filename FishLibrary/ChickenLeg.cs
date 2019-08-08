@@ -8,26 +8,26 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace FishLibrary
 {
+    /// <summary>
+    /// ChickenLeg class for representation of fish food in scene
+    /// </summary>
     public class ChickenLeg : IDraw, IToken
     {
+        // CLASS VARIABLES
         private string textureID;       // Holds a string to identify asset used for this token
         private Vector2 position;       // Holds X and Y coordinates for token position on screen
-        private bool removeFlag;            // Flag  - remove chickenLeg of true (polled by kernel update)
+        private bool removeFlag;        // Flag  - remove chickenLeg of true (polled by kernel update)
 
-        public string TextureID
-        {
-            get { return textureID; }
-        }
-        public Vector2 Position
-        {
-            get { return position; }
-        }
+        /// PROPERTIES
+        public string TextureID { get => textureID; }           // Property to access textureID
+        public Vector2 Position { get => position; }            // Property to access position
+        public bool RemoveFlag { get => removeFlag; }           // Property to access removeFlag
 
-        public bool RemoveFlag
-        {
-            get { return removeFlag; }
-        }
-
+        /// <summary>
+        /// Constructor - sets token texture and position
+        /// </summary>
+        /// <param name="pTextureID"> String with texture name to associate preloaded asset</param>
+        /// <param name="pPosition"> Vector2 with initial 2D position in scene</param>
         public ChickenLeg(string pTextureID, Vector2 pPosition)
         {
             textureID = pTextureID;
@@ -35,6 +35,9 @@ namespace FishLibrary
             removeFlag = false;
         }
 
+        /// <summary>
+        /// Remove Method - sets removeFlag to true (for polling by kernel to remove chickenleg from scene during main update loop)
+        /// </summary>
         public void Remove()
         {
             removeFlag = true;
@@ -43,8 +46,8 @@ namespace FishLibrary
         /// <summary>
         /// Draw Method
         /// </summary>
-        /// <param name="pAssetManager">Reference to the AssetManager which stores the assets required for drawing</param>
-        /// <param name="pSpriteBatch">Reference to an open SpriteBatch, to add this token's texture to</param>
+        /// <param name="pAssetManager"> Reference to the AssetManager which stores the assets required for drawing</param>
+        /// <param name="pSpriteBatch"> Reference to an open SpriteBatch, to add this token's texture to</param>
         public void Draw(IGetAsset pAssetManager, SpriteBatch pSpriteBatch)
         {
             Asset currentAsset = pAssetManager.GetAssetByID(textureID); // Get this token's asset from the AssetManager

@@ -7,14 +7,14 @@ using Microsoft.Xna.Framework;
 
 namespace FishLibrary
 {
+    /// <summary>
+    /// Camera class manages the camera position and geometry
+    /// </summary>
     public class Camera
     {
         private Matrix transform;       // Holds a variety of positional information about the camera, including scale and rotation
 
-        public Matrix Transform
-        {
-            get { return transform; }
-        }
+        public Matrix Transform { get => transform; }           // Property to access transform
 
         /// <summary>
         /// Camera Constructor

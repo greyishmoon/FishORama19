@@ -8,21 +8,17 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace FishLibrary
 {
+
+    /// <summary>
+    /// Asset class which stores the texture assets loaded into the game engine
+    /// </summary>
     public class Asset
     {
         private Texture2D texture;      // Stores the image with which to draw this asset
         private Vector2 size;           // The size of the image, in pixels
 
-        public Texture2D Texture
-        {
-            get { return texture; }
-            set { texture = value; }
-        }
-        public Vector2 Size
-        {
-            get { return size; }
-            set { size = value; }
-        }
+        public Texture2D Texture { get => texture; set => texture = value; }    // Property to access texture
+        public Vector2 Size { get => size; set => size = value; }               // Property to access size
 
         /// <summary>
         /// Asset Constructor

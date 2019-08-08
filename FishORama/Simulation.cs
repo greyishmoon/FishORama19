@@ -12,11 +12,13 @@ namespace FishORama
     {
         // CLASS VARIABLES
         // Variables store the information for the class
-        private IKernel kernel;         // Holds a reference to the game engine kernel which calls the draw method for every token you add to it
-        private Screen screen;          // Holds a reference to the screeen dimensions (width, height)
-        private IToken chickenLeg;      // Holds a reference to the chicken leg variable
-        private int testNum;
-        bool firstRun = true;
+        private IKernel kernel;                 // Holds a reference to the game engine kernel which calls the draw method for every token you add to it
+        private Screen screen;                  // Holds a reference to the screeen dimensions (width, height)
+        //private IToken chickenLeg;            // Holds a reference to the chicken leg variable
+        private ITokenManager tokenManager;     // Holds a reference to the TokenManager - for access to ChickenLeg variable
+
+        /// PROPERTIES
+        public ITokenManager TokenManager { set => tokenManager = value; }      // Property to access chickenLeg variable
 
         // *** ADD YOUR CLASS VARIABLES HERE ***
 
@@ -25,14 +27,15 @@ namespace FishORama
 
      
 
+
+
+
         /// CONSTRUCTOR - for the Simulation class - run once only when an object of the Simulation class is INSTANTIATED (created)
         /// Use constructors to set up the state of a class
         public Simulation(IKernel pKernel)
         {
-            kernel = pKernel;       // Stores the game engine kernel which is passed to the constructor when this class is created
-            screen = kernel.Screen;
-            
-            
+            kernel = pKernel;                   // Stores the game engine kernel which is passed to the constructor when this class is created
+            screen = kernel.Screen;             // Sets the screen variable in Simulation so the screen dimensions are accessible
         }
 
         /// METHOD: LoadContent - called once at start of program
@@ -43,35 +46,27 @@ namespace FishORama
 
             // EXAMPLE: CREATION of a new OrangeFish object, INITIALISATION of the orangeFish1 variable
             // and insertion of the OrangeFish object into the FishORama engine
-            orangeFish1 = new OrangeFish("OrangeFish", 0, 0, screen, chickenLeg);
+            orangeFish1 = new OrangeFish("OrangeFish", 0, 0, screen, tokenManager);
             kernel.InsertToken(orangeFish1);
 
 
 
-            //chickenLeg = kernel.ChickenLeg;
+
+
         }
 
         /// METHOD: Update - called 60 times a second by the FishORama engine when the program is running
         /// Add all tokens so Update is called on them regularly
         public void Update(GameTime gameTime)
         {
-            if (firstRun)
-            {
-                chickenLeg = kernel.ChickenLeg;
-            }
 
             // *** ADD YOUR UPDATE CODE HERE ***
 
             // EXAMPLE: Calling Update() on the example OrangeFish object
             orangeFish1.Update();
 
-            //Console.WriteLine(kernel.ChickenLeg);
-            //Console.WriteLine(chickenLeg);
 
-            //if (kernel.ChickenLeg != null)
-            //{
-            //    Console.WriteLine("SFSG");
-            //}
+
 
 
         }

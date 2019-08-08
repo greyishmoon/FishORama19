@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 namespace FishLibrary
 {
     /// <summary>
-    /// This is the main type for your game.
+    /// This is the main class for your game.
     /// </summary>
     public class Kernel : Game, IKernel
     {
@@ -16,31 +16,18 @@ namespace FishLibrary
         private List<IDraw> drawables;              // List of each token to be drawn each frame
         private IUpdate simulation;                 // Holds a reference to the game simulation to be able to call its Update method each frame
         private AssetManager assetManager;          // Stores every texture that can be used by tokens
-        private ChickenLeg chickenLeg;              // Stores a reference to the chicken leg while it's on the screen
+        private ITokenManager tokenManager;         // Holds a reference to the TokenManager - for access to ChickenLeg variable
         private Camera camera;                      // Every token is drawn in a position relative to this camera
-        private Screen screen;
-        private int testnum = 2;
+        private Screen screen;                      // Holds screen dimensions (width, height)
 
+        /// PROPERTIES
+        public IUpdate Simulation { set => simulation = value; }
+        public Screen Screen { get => screen; }
+        public ITokenManager TokenManager { set => tokenManager = value; }
 
-
-        public IUpdate Simulation
-        {
-            set { simulation = value; }
-        }
-        public IToken ChickenLeg
-        {
-            get { return chickenLeg; }
-        }
-        public Screen Screen
-        {
-            get { return screen; }
-        }
-
-        public int TestNum
-        {
-            get { return testnum; }
-        }
-
+        /// <summary>
+        /// Kernel constructor - creates Game components required by MonoGame
+        /// </summary>
         public Kernel()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -57,10 +44,9 @@ namespace FishLibrary
         }
 
         /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
+        /// Initialize method - Allows the game to perform any initialization it needs to before starting to run.
+        /// This is where it can query for any required services and load any non-graphic related content.
+        /// Calling base.Initialize will enumerate through any components and initialize them as well.
         /// </summary>
         protected override void Initialize()
         {
@@ -73,8 +59,7 @@ namespace FishLibrary
         }
 
         /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
+        /// LoadContent method - will be called once per game and is the place to load all of your content.
         /// </summary>
         protected override void LoadContent()
         {
@@ -146,8 +131,7 @@ namespace FishLibrary
         }
 
         /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// game-specific content.
+        /// UnloadContent method - will be called once per game and is the place to unload game-specific content.
         /// </summary>
         protected override void UnloadContent()
         {
@@ -155,14 +139,14 @@ namespace FishLibrary
         }
 
         /// <summary>
-        /// Allows the game to run logic such as updating the world,
+        /// Update method - Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
             // If a chicken leg is not currently placed and the left mouse button is pressed
-            if(chickenLeg == null && Mouse.GetState().LeftButton == ButtonState.Pressed)
+            if(tokenManager.ChickenLeg == null && Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
                 // Capture the current position of the mouse and align it to the camera
                 Vector2 mousePosition = Mouse.GetState().Position.ToVector2();
@@ -170,30 +154,31 @@ namespace FishLibrary
                 mousePosition.Y -= camera.Transform.Translation.Y;
 
                 // Place a new chicken leg at the position of the mouse
-                chickenLeg = new ChickenLeg("ChickenLeg", mousePosition);
-                InsertToken(chickenLeg);
+                ChickenLeg newChickenLeg = new ChickenLeg("ChickenLeg", mousePosition);
+                tokenManager.SetChickenLeg(newChickenLeg);
+                InsertToken(newChickenLeg);
 
-                testnum = 5;
             }
 
             // Poll chicken leg if present and check remove flag - remove if true
-            if (chickenLeg != null)
+            if (tokenManager.ChickenLeg != null)
             {
-                if (chickenLeg.RemoveFlag)
+                if (tokenManager.ChickenLeg.RemoveFlag)
                 {
                     RemoveChickenLeg();
                 }
             }
 
             
-
+            // Call update on Simulation to run main game loop
             simulation.Update(gameTime);
-
+            
+            // Update MonoGame game engine
             base.Update(gameTime);
         }
 
         /// <summary>
-        /// This is called when the game should draw itself.
+        /// Draw method - This is called when the game should draw itself.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
@@ -221,7 +206,7 @@ namespace FishLibrary
         }
 
         /// <summary>
-        /// Insert a new token into the kernel, so that it can be drawn every frame
+        /// InsertToken method - Insert a new token into the kernel, so that it can be drawn every frame
         /// </summary>
         /// <param name="pToken">The token to be inserted</param>
         public void InsertToken(IDraw pToken)
@@ -230,7 +215,7 @@ namespace FishLibrary
         }
 
         /// <summary>
-        /// Remove an existing token from the kernel, so that its draw method won't be called on future updates
+        /// RemoveToken method - Remove an existing token from the kernel, so that its draw method won't be called on future updates
         /// </summary>
         /// <param name="pToken">The token to be removed</param>
         public void RemoveToken(IDraw pToken)
@@ -241,16 +226,17 @@ namespace FishLibrary
         /// <summary>
         /// Removes the chicken leg from the game, if it exists
         /// </summary>
-        public void RemoveChickenLeg()
+        private void RemoveChickenLeg()
         {
-            if(chickenLeg != null)
+            if(tokenManager.ChickenLeg != null)
             {
-                RemoveToken(chickenLeg);
-                chickenLeg = null;
+                RemoveToken(tokenManager.ChickenLeg);
+                tokenManager.SetChickenLeg(null);
             }
         }
     }
 
+    // Bespoke data structure to store screen dimensions
     public struct Screen
     {
         public int width, height;

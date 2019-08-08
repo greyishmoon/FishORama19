@@ -16,14 +16,13 @@ namespace FishORama
         // CLASS VARIABLES
         // Variables hold the information for the class
         // NOTE - these variables must be present for the class to act as a TOKEN for the FishORama engine
-        private string textureID;       // Holds a string to identify asset used for this token
-        private int xPosition;          // Holds the X coordinate for token position on screen
-        private int yPosition;          // Holds the X coordinate for token position on screen
-        private int xDirection;         // Holds the direction the token is currently moving - X value should be either -1 (left) or 1 (right)
-        private int yDirection;         // Holds the direction the token is currently moving - Y value should be either -1 (down) or 1 (up)
-        private Screen screen;          // Holds a reference to the screen dimansions (width and height)
-        private IToken chickenLeg;      // Holds a reference to the chicken leg variable
-
+        private string textureID;               // Holds a string to identify asset used for this token
+        private int xPosition;                  // Holds the X coordinate for token position on screen
+        private int yPosition;                  // Holds the X coordinate for token position on screen
+        private int xDirection;                 // Holds the direction the token is currently moving - X value should be either -1 (left) or 1 (right)
+        private int yDirection;                 // Holds the direction the token is currently moving - Y value should be either -1 (down) or 1 (up)
+        private Screen screen;                  // Holds a reference to the screen dimansions (width and height)
+        private ITokenManager tokenManager;     // Holds a reference to the TokenManager - for access to ChickenLeg variable
 
         // *** ADD YOUR CLASS VARIABLES HERE ***
 
@@ -32,7 +31,7 @@ namespace FishORama
 
         /// CONSTRUCTOR: OrangeFish Constructor
         /// The elements in the brackets are PARAMETERS, which will be covered later in the course
-        public OrangeFish(string pTextureID, int pXpos, int pYpos, Screen pScreen, IToken pChickenLeg)
+        public OrangeFish(string pTextureID, int pXpos, int pYpos, Screen pScreen, ITokenManager pTokenManager)
         {
             // State initialisation (setup) for the object
             textureID = pTextureID;
@@ -41,9 +40,10 @@ namespace FishORama
             xDirection = 1;
             yDirection = 1;
             screen = pScreen;
-            chickenLeg = pChickenLeg;
+            tokenManager = pTokenManager;
 
             // *** ADD OTHER INITIALISATION (class setup) CODE HERE ***
+
 
 
             
@@ -57,8 +57,13 @@ namespace FishORama
             // *** ADD YOUR MOVEMENT/BEHAVIOUR CODE HERE ***
             xPosition += xDirection;
 
-            Console.WriteLine(chickenLeg);
+            Console.WriteLine(tokenManager.ChickenLeg);
 
+            if (xPosition > screen.width / 2)
+            {
+                xDirection *= -1;
+                tokenManager.ChickenLeg.Remove();
+            }
 
 
         }
@@ -83,7 +88,7 @@ namespace FishORama
                 horizontalDirection = SpriteEffects.None;
             }
 
-            // Draw an image centered at the token's position, using the associated texture
+            // Draw an image centered at the token's position, using the associated texture / position
             pSpriteBatch.Draw(currentAsset.Texture,                                             // Texture
                               new Vector2(xPosition, yPosition),                                // Position
                               null,                                                             // Source rectangle (null)
