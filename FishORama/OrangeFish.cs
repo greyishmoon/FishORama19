@@ -49,21 +49,14 @@ namespace FishORama
             
         }
 
-        /// METHOD: Update - Called repeatedly by the Update loop in Simulation
+        /// METHOD: Update - to be called repeatedly by the Update loop in Simulation
         /// Write the movement control code here
         public void Update()
         {
 
             // *** ADD YOUR MOVEMENT/BEHAVIOUR CODE HERE ***
-            xPosition += xDirection;
+            
 
-            Console.WriteLine(tokenManager.ChickenLeg);
-
-            if (xPosition > screen.width / 2)
-            {
-                xDirection *= -1;
-                tokenManager.RemoveChickenLeg();
-            }
 
 
         }
@@ -79,7 +72,7 @@ namespace FishORama
 
             if(xDirection < 0)
             {
-                // If the token's horizontal direction is negative, draw it inverted
+                // If the token's horizontal direction is negative, draw it reversed
                 horizontalDirection = SpriteEffects.FlipHorizontally;
             }
             else

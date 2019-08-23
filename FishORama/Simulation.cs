@@ -14,11 +14,13 @@ namespace FishORama
         // Variables store the information for the class
         private IKernel kernel;                 // Holds a reference to the game engine kernel which calls the draw method for every token you add to it
         private Screen screen;                  // Holds a reference to the screeen dimensions (width, height)
-        //private IToken chickenLeg;            // Holds a reference to the chicken leg variable
         private ITokenManager tokenManager;     // Holds a reference to the TokenManager - for access to ChickenLeg variable
 
         /// PROPERTIES
-        public ITokenManager TokenManager { set => tokenManager = value; }      // Property to access chickenLeg variable
+        public ITokenManager TokenManager      // Property to access chickenLeg variable
+        {
+            set { tokenManager = value; }
+        }
 
         // *** ADD YOUR CLASS VARIABLES HERE ***
 

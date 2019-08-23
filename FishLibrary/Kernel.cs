@@ -32,6 +32,7 @@ namespace FishLibrary
         {
             graphics = new GraphicsDeviceManager(this);
 
+            // Set screen dimensions
             screen = new Screen(800, 600);
 
             // Set display window size
