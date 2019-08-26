@@ -155,7 +155,7 @@ namespace FishLibrary
                 mousePosition.Y -= camera.Transform.Translation.Y;
 
                 // Place a new chicken leg at the position of the mouse
-                ChickenLeg newChickenLeg = new ChickenLeg("ChickenLeg", mousePosition);
+                ChickenLeg newChickenLeg = new ChickenLeg("ChickenLeg", (int)mousePosition.X, (int)mousePosition.Y);
                 tokenManager.SetChickenLeg(newChickenLeg);
                 InsertToken(newChickenLeg);
 

@@ -28,10 +28,10 @@ namespace FishLibrary
         /// </summary>
         /// <param name="pTextureID"> String with texture name to associate preloaded asset</param>
         /// <param name="pPosition"> Vector2 with initial 2D position in scene</param>
-        public ChickenLeg(string pTextureID, Vector2 pPosition)
+        public ChickenLeg(string pTextureID, int pXpos, int pYpos)
         {
             textureID = pTextureID;
-            position = pPosition;
+            position = new Vector2(pXpos, pYpos);
             removeFlag = false;
         }
 

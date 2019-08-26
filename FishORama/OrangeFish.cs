@@ -53,7 +53,6 @@ namespace FishORama
         /// Write the movement control code here
         public void Update()
         {
-
             // *** ADD YOUR MOVEMENT/BEHAVIOUR CODE HERE ***
             
 
