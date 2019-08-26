@@ -38,6 +38,12 @@ namespace FishORama
         {
             kernel = pKernel;                   // Stores the game engine kernel which is passed to the constructor when this class is created
             screen = kernel.Screen;             // Sets the screen variable in Simulation so the screen dimensions are accessible
+
+            // *** ADD OTHER INITIALISATION (class setup) CODE HERE ***
+
+
+
+
         }
 
         /// METHOD: LoadContent - called once at start of program

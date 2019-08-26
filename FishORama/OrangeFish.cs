@@ -17,8 +17,8 @@ namespace FishORama
         // Variables hold the information for the class
         // NOTE - these variables must be present for the class to act as a TOKEN for the FishORama engine
         private string textureID;               // Holds a string to identify asset used for this token
-        private int xPosition;                  // Holds the X coordinate for token position on screen
-        private int yPosition;                  // Holds the X coordinate for token position on screen
+        private float xPosition;                // Holds the X coordinate for token position on screen
+        private float yPosition;                // Holds the X coordinate for token position on screen
         private int xDirection;                 // Holds the direction the token is currently moving - X value should be either -1 (left) or 1 (right)
         private int yDirection;                 // Holds the direction the token is currently moving - Y value should be either -1 (down) or 1 (up)
         private Screen screen;                  // Holds a reference to the screen dimansions (width and height)
@@ -31,7 +31,7 @@ namespace FishORama
 
         /// CONSTRUCTOR: OrangeFish Constructor
         /// The elements in the brackets are PARAMETERS, which will be covered later in the course
-        public OrangeFish(string pTextureID, int pXpos, int pYpos, Screen pScreen, ITokenManager pTokenManager)
+        public OrangeFish(string pTextureID, float pXpos, float pYpos, Screen pScreen, ITokenManager pTokenManager)
         {
             // State initialisation (setup) for the object
             textureID = pTextureID;
@@ -54,7 +54,7 @@ namespace FishORama
         public void Update()
         {
             // *** ADD YOUR MOVEMENT/BEHAVIOUR CODE HERE ***
-            
+
 
 
 
