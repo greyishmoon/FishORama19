@@ -8,7 +8,7 @@ namespace FishLibrary
 {
     /// <summary>
     /// Kernel class - This is the main class for your game.
-    /// Version 1.2 - 26/8/19
+    /// Version 1.4 - 02/09/19
     /// </summary>
     public class Kernel : Game, IKernel
     {
