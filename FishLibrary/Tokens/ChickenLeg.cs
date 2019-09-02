@@ -20,7 +20,7 @@ namespace FishLibrary
 
         /// PROPERTIES
         public string TextureID { get => textureID; }           // Property to access textureID
-        public Vector2 Position { get => position; }            // Property to access position
+        public Vector2 Position { get => new Vector2(position.X, position.Y * -1); }    // Return Position with Y reversed to cater for reversed ycoordinate system
         public bool RemoveFlag { get => removeFlag; }           // Property to access removeFlag
 
         /// <summary>
