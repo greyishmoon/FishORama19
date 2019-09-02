@@ -57,7 +57,6 @@ namespace FishORama
 
 
 
-
         }
 
         /// METHOD: Draw - Called repeatedly by FishORama engine to draw token on screen
@@ -82,7 +81,7 @@ namespace FishORama
 
             // Draw an image centered at the token's position, using the associated texture / position
             pSpriteBatch.Draw(currentAsset.Texture,                                             // Texture
-                              new Vector2(xPosition, yPosition),                                // Position
+                              new Vector2(xPosition, yPosition*-1),                                // Position
                               null,                                                             // Source rectangle (null)
                               Color.White,                                                      // Background colour
                               0f,                                                               // Rotation (radians)
