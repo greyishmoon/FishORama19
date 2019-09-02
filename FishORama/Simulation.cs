@@ -54,7 +54,7 @@ namespace FishORama
 
             // EXAMPLE: CREATION of a new OrangeFish object, INITIALISATION of the orangeFish1 variable
             // and insertion of the OrangeFish object into the FishORama engine
-            orangeFish1 = new OrangeFish("OrangeFish", 0, 0, screen, tokenManager);
+            orangeFish1 = new OrangeFish("Urchin", 0, 0, screen, tokenManager);
             kernel.InsertToken(orangeFish1);
 
 
