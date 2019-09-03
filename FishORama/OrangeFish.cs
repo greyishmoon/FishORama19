@@ -25,6 +25,7 @@ namespace FishORama
         private ITokenManager tokenManager;     // Holds a reference to the TokenManager - for access to ChickenLeg variable
 
         // *** ADD YOUR CLASS VARIABLES HERE ***
+        
 
 
 
@@ -43,6 +44,7 @@ namespace FishORama
             tokenManager = pTokenManager;
 
             // *** ADD OTHER INITIALISATION (class setup) CODE HERE ***
+            
 
 
 
@@ -54,6 +56,8 @@ namespace FishORama
         public void Update()
         {
             // *** ADD YOUR MOVEMENT/BEHAVIOUR CODE HERE ***
+
+
 
 
 

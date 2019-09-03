@@ -23,11 +23,9 @@ namespace FishORama
         }
 
         // *** ADD YOUR CLASS VARIABLES HERE ***
+        // Variables to hold fish will be declared here
 
-        // EXAMPLE: DECLARATION of an OrangeFish variable that will hold an OrangeFish object
-        OrangeFish orangeFish1;
-
-     
+   
 
 
 
@@ -51,11 +49,9 @@ namespace FishORama
         public void LoadContent(IGetAsset pAssetManager)
         {
             // *** ADD YOUR NEW TOKEN CREATION CODE HERE ***
+            // Code to create fish tokens and assign to thier variables goes here
+            // Remember to insert each token into the kernel
 
-            // EXAMPLE: CREATION of a new OrangeFish object, INITIALISATION of the orangeFish1 variable
-            // and insertion of the OrangeFish object into the FishORama engine
-            orangeFish1 = new OrangeFish("OrangeFish", 0, 0, screen, tokenManager);
-            kernel.InsertToken(orangeFish1);
 
 
 
@@ -69,9 +65,8 @@ namespace FishORama
         {
 
             // *** ADD YOUR UPDATE CODE HERE ***
+            // Each fish object (sitting in a variable) must have Update() called on it here
 
-            // EXAMPLE: Calling Update() on the example OrangeFish object
-            orangeFish1.Update();
 
 
 
